@@ -2137,3 +2137,187 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   color: var(--forest);
   font-weight: 400;
 }
+
+
+/* ---------------------------------------------------------------------
+   39. DIMENSION CARDS (sustainability page — Environmental/Social/Economic)
+   --------------------------------------------------------------------- */
+.dimensions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-top: 2.5rem;
+}
+@media (max-width: 900px) { .dimensions { grid-template-columns: 1fr; } }
+
+.dimension {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.dimension:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px -20px rgba(26,31,28,0.12);
+}
+
+.dimension-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.dimension h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+}
+.dimension .dim-sub {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  margin-top: -0.35rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.dimension ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.25rem;
+}
+.dimension ul li {
+  font-size: 0.97rem;
+  color: var(--ink-soft);
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.45;
+}
+.dimension ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+}
+
+/* Dimension variants */
+.dimension.environmental .dimension-icon {
+  background: #DCE5DE;
+  color: var(--forest);
+}
+.dimension.environmental ul li::before { background: var(--forest); }
+
+.dimension.social .dimension-icon {
+  background: var(--clay-soft);
+  color: var(--clay);
+}
+.dimension.social ul li::before { background: var(--clay); }
+
+.dimension.economic .dimension-icon {
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+.dimension.economic ul li::before { background: var(--amber); }
+
+
+/* ---------------------------------------------------------------------
+   40. CHECKLIST CARD (sustainability page — "Use this" self-check)
+   --------------------------------------------------------------------- */
+.checklist-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 2.5rem;
+  max-width: 44rem;
+  margin-top: 2rem;
+}
+.checklist-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+.checklist-card ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.checklist-card li {
+  padding: 1rem 1.25rem 1rem 3.5rem;
+  background: var(--bg);
+  border-radius: 12px;
+  position: relative;
+  font-size: 1rem;
+  color: var(--ink);
+  transition: background 0.25s ease, transform 0.25s ease;
+  cursor: default;
+}
+.checklist-card li:hover {
+  background: var(--bg-alt);
+  transform: translateX(3px);
+}
+.checklist-card li::before {
+  content: "";
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--forest);
+  border-radius: 50%;
+  background: var(--card);
+  transition: background 0.25s ease;
+}
+.checklist-card li:hover::before {
+  background: var(--forest);
+}
+
+
+/* ---------------------------------------------------------------------
+   41. SOFT FINAL CTA (sustainability page)
+   --------------------------------------------------------------------- */
+.soft-cta {
+  text-align: center;
+  padding: 7rem 0;
+  background: linear-gradient(180deg, var(--bg) 0%, #EDE6D7 100%);
+  position: relative;
+  overflow: hidden;
+}
+.soft-cta::before {
+  content: "";
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(138, 155, 133, 0.15), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.soft-cta h2 {
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  margin-bottom: 1.25rem;
+  max-width: 26ch;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.soft-cta h2 em { color: var(--forest); font-style: italic; }
+.soft-cta p {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  max-width: 34rem;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+.soft-cta .btn { position: relative; }
