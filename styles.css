@@ -3002,11 +3002,18 @@ table.register tbody tr:hover { background: var(--bg-alt); }
 /* ---------------------------------------------------------------------
    45. PROJECT JOURNEY DIAGRAM (homepage — idea to impact)
    --------------------------------------------------------------------- */
-.journey {
+section.journey {
   padding: 7rem 0;
   background: var(--bg);
+  display: block; /* defensive — prevent any inherited grid display */
 }
 
+.journey .container {
+  display: block;
+  width: 100%;
+}
+
+/* --- Intro (centered) --- */
 .journey-intro {
   max-width: 50rem;
   margin-left: auto;
@@ -3040,57 +3047,63 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   margin-right: auto;
 }
 
-/* Stages grid — fills the container like every other grid on the page */
+/* --- Stages grid --- */
 .journey-stages {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
   position: relative;
+  width: 100%;
 }
 
 .journey-stage {
   position: relative;
   text-align: center;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   text-decoration: none;
   color: inherit;
   display: block;
 }
 
-/* Connecting line between icon centers — sits behind the icons */
+/* Dashed connecting line between icon centers */
 .journey-stage:not(:last-child)::before {
   content: '';
   position: absolute;
-  top: 35px; /* vertical center of 72px icon */
-  left: 50%;
-  width: 100%;
-  height: 1.5px;
-  background: var(--line);
+  top: 51px; /* vertical center of 104px icon minus 1px */
+  left: calc(50% + 56px); /* start just outside icon edge */
+  right: calc(-50% + 56px);
+  height: 0;
+  border-top: 2px dashed rgba(31, 74, 52, 0.28);
   z-index: 0;
 }
 
+/* --- Icon circle (bigger, softly filled) --- */
 .stage-icon {
   position: relative;
   z-index: 1;
-  width: 72px;
-  height: 72px;
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
-  background: var(--bg);
-  border: 1.5px solid var(--line);
-  margin: 0 auto 1.75rem;
+  background: rgba(31, 74, 52, 0.06);
+  border: 1.5px solid rgba(31, 74, 52, 0.22);
+  margin: 0 auto 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--forest);
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+.stage-icon svg {
+  width: 38px;
+  height: 38px;
 }
 
 .journey-stage:hover .stage-icon {
   background: var(--forest);
   color: var(--bg);
   border-color: var(--forest);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px -12px rgba(31, 74, 52, 0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 38px -14px rgba(31, 74, 52, 0.5);
 }
 
 .journey-stage:focus-visible { outline: none; }
@@ -3099,22 +3112,23 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   outline-offset: 4px;
 }
 
+/* --- Text below the icon --- */
 .stage-num {
   display: block;
   font-family: 'Fraunces', serif;
   font-style: italic;
   color: var(--clay);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   letter-spacing: 0.03em;
   margin-bottom: 0.4rem;
 }
 
 .stage-title {
   font-family: 'Fraunces', serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.2;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
   color: var(--ink);
   letter-spacing: -0.01em;
   transition: color 0.25s ease;
@@ -3122,37 +3136,49 @@ table.register tbody tr:hover { background: var(--bg-alt); }
 .journey-stage:hover .stage-title { color: var(--forest); }
 
 .stage-desc {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--ink-soft);
   line-height: 1.55;
-  max-width: 14rem;
-  margin: 0 auto;
+  max-width: 15rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Tablet — slightly tighter */
+/* --- Tablet (901–1100px) — shrink slightly --- */
 @media (max-width: 1100px) and (min-width: 901px) {
-  .journey-stage { padding: 0 0.4rem; }
-  .stage-title { font-size: 1.2rem; }
-  .stage-desc { font-size: 0.85rem; }
+  .journey-stage { padding: 0 0.35rem; }
+  .stage-icon { width: 88px; height: 88px; }
+  .stage-icon svg { width: 34px; height: 34px; }
+  .journey-stage:not(:last-child)::before {
+    top: 43px;
+    left: calc(50% + 48px);
+    right: calc(-50% + 48px);
+  }
+  .stage-title { font-size: 1.3rem; }
+  .stage-desc { font-size: 0.87rem; }
 }
 
-/* Mobile — stack vertically */
+/* --- Mobile (≤900px) — stack vertically --- */
 @media (max-width: 900px) {
-  .journey { padding: 5rem 0; }
+  section.journey { padding: 5rem 0; }
   .journey-intro { margin-bottom: 3.5rem; }
   .journey-stages {
     grid-template-columns: 1fr;
-    max-width: 30rem;
-    margin: 0 auto;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
     gap: 3rem;
   }
   .journey-stage { padding: 0; }
   .journey-stage:not(:last-child)::before {
-    top: 72px;
+    top: 104px;
     left: 50%;
-    width: 1.5px;
+    right: auto;
+    width: 0;
     height: 3rem;
-    transform: translateX(-50%);
+    border-top: 0;
+    border-left: 2px dashed rgba(31, 74, 52, 0.28);
+    transform: translateX(-1px);
   }
   .stage-desc { max-width: none; }
 }
