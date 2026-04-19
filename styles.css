@@ -40,34 +40,63 @@
 
 /* ---------------------------------------------------------------------
    01. DESIGN TOKENS
+   ---------------------------------------------------------------------
+
+   ORIGINAL PALETTE (warm editorial — saved in case you want to revert).
+   To revert: comment out the :root block below and uncomment this one.
+
+   :root {
+     --bg:         #F4EFE6;
+     --bg-alt:     #EBE4D6;
+     --card:       #FBF8F1;
+     --line:       #D9D1C0;
+     --ink:        #1A1F1C;
+     --ink-soft:   #3D4540;
+     --ink-muted:  #6C7570;
+     --forest:      #1F4A34;
+     --forest-dark: #133124;
+     --clay:        #C7623F;
+     --clay-soft:   #F4DDD0;
+     --sage:        #8A9B85;
+     --amber:       #B8860B;
+     --amber-soft:  #F4E8C8;
+     --danger:      #A03A2C;
+     --danger-soft: #F3D6CF;
+     --focus:  #1F4A34;
+     --radius: 4px;
+     --maxw:   1180px;
+   }
+
    --------------------------------------------------------------------- */
+
+/* CURRENT PALETTE — fresh, brighter, punchier */
 :root {
-  /* Surfaces */
-  --bg:         #F4EFE6;
-  --bg-alt:     #EBE4D6;
-  --card:       #FBF8F1;
-  --line:       #D9D1C0;
+  /* Surfaces — lighter, crisper */
+  --bg:         #FAF6EE;
+  --bg-alt:     #F1E9D8;
+  --card:       #FFFFFF;
+  --line:       #E5DDCC;
 
-  /* Text */
-  --ink:        #1A1F1C;
-  --ink-soft:   #3D4540;
-  --ink-muted:  #6C7570;
+  /* Text — slightly cooler ink */
+  --ink:        #161A1F;
+  --ink-soft:   #3A4048;
+  --ink-muted:  #6A7078;
 
-  /* Brand */
-  --forest:      #1F4A34;
-  --forest-dark: #133124;
-  --clay:        #C7623F;
-  --clay-soft:   #F4DDD0;
-  --sage:        #8A9B85;
+  /* Brand — brighter teal-green + punchier coral */
+  --forest:      #0E6B5A;
+  --forest-dark: #074538;
+  --clay:        #E15A3C;
+  --clay-soft:   #FCDFD5;
+  --sage:        #7FA89A;
 
-  /* Status */
-  --amber:       #B8860B;
-  --amber-soft:  #F4E8C8;
-  --danger:      #A03A2C;
-  --danger-soft: #F3D6CF;
+  /* Status — richer saffron, cleaner danger */
+  --amber:       #9C6608;
+  --amber-soft:  #FAEAC2;
+  --danger:      #C4362E;
+  --danger-soft: #FAD6D2;
 
   /* Utility */
-  --focus:  #1F4A34;
+  --focus:  #0E6B5A;
   --radius: 4px;
   --maxw:   1180px;
 }
@@ -455,7 +484,7 @@ section { padding: 5rem 0; }
 .callout.warn .callout-icon { background: var(--clay); color: var(--bg); }
 .callout.warn h4 { color: var(--clay); }
 
-.callout.info { background: #DCE5DE; border-color: #B8C9BC; }
+.callout.info { background: #D5E8E2; border-color: #A5CFC2; }
 .callout.info .callout-icon { background: var(--forest); color: var(--bg); }
 .callout.info h4 { color: var(--forest); }
 
@@ -522,7 +551,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   font-weight: 500;
   letter-spacing: 0.05em;
 }
-.badge-low  { background: #DCE5DE;          color: var(--forest); }
+.badge-low  { background: #D5E8E2;          color: var(--forest); }
 .badge-med  { background: var(--amber-soft); color: var(--amber); }
 .badge-high { background: var(--danger-soft); color: var(--danger); }
 
@@ -1625,7 +1654,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(31, 74, 52, 0.06), transparent 70%);
+  background: radial-gradient(circle, rgba(14, 107, 90, 0.06), transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -2211,7 +2240,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
 
 /* Dimension variants */
 .dimension.environmental .dimension-icon {
-  background: #DCE5DE;
+  background: #D5E8E2;
   color: var(--forest);
 }
 .dimension.environmental ul li::before { background: var(--forest); }
@@ -2548,7 +2577,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   border-color: var(--forest);
   background: var(--forest);
   color: var(--bg);
-  box-shadow: 0 6px 18px -8px rgba(31, 74, 52, 0.35);
+  box-shadow: 0 6px 18px -8px rgba(14, 107, 90, 0.35);
 }
 .quiz-option input:checked + .option-inner .option-icon {
   background: var(--bg);
@@ -2603,7 +2632,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   background: var(--forest-dark);
   border-color: var(--forest-dark);
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px -10px rgba(31, 74, 52, 0.45);
+  box-shadow: 0 10px 22px -10px rgba(14, 107, 90, 0.45);
 }
 .quiz-next:disabled {
   background: var(--line);
@@ -2702,7 +2731,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
 .quiz-result.result-med .result-status { color: var(--amber); }
 
 .quiz-result.result-high {
-  background: #DCE5DE;
+  background: #D5E8E2;
   border-color: var(--forest);
   color: var(--ink);
 }
@@ -2919,7 +2948,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
 .qc-submit:hover:not(:disabled) {
   background: var(--forest-dark);
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px -10px rgba(31, 74, 52, 0.45);
+  box-shadow: 0 10px 22px -10px rgba(14, 107, 90, 0.45);
 }
 .qc-submit:disabled {
   background: var(--line);
@@ -3073,7 +3102,7 @@ section.journey {
   left: calc(50% + 56px); /* start just outside icon edge */
   right: calc(-50% + 56px);
   height: 0;
-  border-top: 2px dashed rgba(31, 74, 52, 0.28);
+  border-top: 2px dashed rgba(14, 107, 90, 0.28);
   z-index: 0;
 }
 
@@ -3084,8 +3113,8 @@ section.journey {
   width: 104px;
   height: 104px;
   border-radius: 50%;
-  background: rgba(31, 74, 52, 0.06);
-  border: 1.5px solid rgba(31, 74, 52, 0.22);
+  background: rgba(14, 107, 90, 0.06);
+  border: 1.5px solid rgba(14, 107, 90, 0.22);
   margin: 0 auto 2rem;
   display: flex;
   align-items: center;
@@ -3103,7 +3132,7 @@ section.journey {
   color: var(--bg);
   border-color: var(--forest);
   transform: translateY(-4px);
-  box-shadow: 0 20px 38px -14px rgba(31, 74, 52, 0.5);
+  box-shadow: 0 20px 38px -14px rgba(14, 107, 90, 0.5);
 }
 
 .journey-stage:focus-visible { outline: none; }
@@ -3177,7 +3206,7 @@ section.journey {
     width: 0;
     height: 3rem;
     border-top: 0;
-    border-left: 2px dashed rgba(31, 74, 52, 0.28);
+    border-left: 2px dashed rgba(14, 107, 90, 0.28);
     transform: translateX(-1px);
   }
   .stage-desc { max-width: none; }
