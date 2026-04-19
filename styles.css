@@ -2772,3 +2772,228 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   gap: 0.5rem;
 }
 .retake-btn:hover { background: rgba(26, 31, 28, 0.08); }
+
+
+/* ---------------------------------------------------------------------
+   44. QUICK START CHECK (homepage — 3-question inline quiz)
+   --------------------------------------------------------------------- */
+.quick-check {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.quick-check-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 4rem;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .quick-check-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.quick-check-intro h2 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+.quick-check-intro h2 em {
+  font-style: italic;
+  color: var(--forest);
+  font-weight: 300;
+}
+.quick-check-intro p {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  max-width: 26rem;
+}
+
+/* Interactive panel */
+.quick-check-panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 2.25rem;
+  position: relative;
+  box-shadow: 0 12px 32px -24px rgba(26, 31, 28, 0.25);
+}
+@media (max-width: 500px) { .quick-check-panel { padding: 1.75rem 1.5rem; } }
+
+.qc-form { display: block; }
+.qc-form[hidden] { display: none; }
+
+.qc-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+  transition: opacity 0.2s ease;
+}
+.qc-question:first-of-type { padding-top: 0.25rem; }
+.qc-question:last-of-type { border-bottom: none; padding-bottom: 1.25rem; }
+@media (max-width: 500px) {
+  .qc-question {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+.qc-q-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.qc-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.qc-options label {
+  position: relative;
+  cursor: pointer;
+}
+.qc-options input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.qc-options span {
+  display: inline-block;
+  padding: 0.5rem 1.15rem;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+  min-width: 60px;
+  text-align: center;
+}
+.qc-options label:hover span {
+  border-color: var(--forest);
+  color: var(--ink);
+}
+.qc-options input:focus-visible + span {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.qc-options input:checked + span {
+  background: var(--forest);
+  border-color: var(--forest);
+  color: var(--bg);
+}
+
+/* Submit */
+.qc-submit {
+  width: 100%;
+  margin-top: 1.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.95rem 1.5rem;
+  background: var(--forest);
+  color: var(--bg);
+  border: 1.5px solid var(--forest);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.qc-submit:hover:not(:disabled) {
+  background: var(--forest-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px -10px rgba(31, 74, 52, 0.45);
+}
+.qc-submit:disabled {
+  background: var(--line);
+  color: var(--ink-muted);
+  border-color: var(--line);
+  cursor: not-allowed;
+}
+.qc-submit svg { transition: transform 0.2s; }
+.qc-submit:hover:not(:disabled) svg { transform: translateX(3px); }
+
+/* Result (replaces form in the same panel) */
+.quick-check-result {
+  display: none;
+  animation: qcFadeIn 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.quick-check-result.show { display: block; }
+@keyframes qcFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.qc-status-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.qc-status {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.qc-message {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+/* Result colour states — accent on the status only, not the whole card */
+.quick-check-result.qc-low  .qc-status { color: var(--clay); }
+.quick-check-result.qc-med  .qc-status { color: var(--amber); }
+.quick-check-result.qc-high .qc-status { color: var(--forest); }
+
+.qc-result-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.qc-result-actions .btn {
+  padding: 0.7rem 1.3rem;
+  font-size: 0.9rem;
+}
+.qc-retake {
+  background: transparent;
+  border: 1.5px solid var(--line);
+  color: var(--ink-soft);
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.qc-retake:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}

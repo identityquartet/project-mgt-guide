@@ -235,6 +235,66 @@
     </div>
   </section>
 
+  <!-- QUICK START CHECK (interactive — 3-question readiness snapshot) -->
+  <section class="quick-check" id="quick-check">
+    <div class="container">
+      <div class="quick-check-grid">
+
+        <div class="quick-check-intro">
+          <span class="eyebrow">Quick check</span>
+          <h2>Not sure <em>where to start?</em></h2>
+          <p>Answer three quick questions to check your project readiness. Takes less than a minute — and points you to the next step that'll help most.</p>
+        </div>
+
+        <div class="quick-check-panel">
+
+          <div class="qc-form" id="qc-form">
+            <div class="qc-question">
+              <span class="qc-q-text">Do you have a clear goal?</span>
+              <div class="qc-options" role="radiogroup" aria-label="Do you have a clear goal?">
+                <label><input type="radio" name="qc1" value="1"><span>Yes</span></label>
+                <label><input type="radio" name="qc1" value="0"><span>No</span></label>
+              </div>
+            </div>
+            <div class="qc-question">
+              <span class="qc-q-text">Do you have a timeline?</span>
+              <div class="qc-options" role="radiogroup" aria-label="Do you have a timeline?">
+                <label><input type="radio" name="qc2" value="1"><span>Yes</span></label>
+                <label><input type="radio" name="qc2" value="0"><span>No</span></label>
+              </div>
+            </div>
+            <div class="qc-question">
+              <span class="qc-q-text">Do you know who is involved?</span>
+              <div class="qc-options" role="radiogroup" aria-label="Do you know who is involved?">
+                <label><input type="radio" name="qc3" value="1"><span>Yes</span></label>
+                <label><input type="radio" name="qc3" value="0"><span>No</span></label>
+              </div>
+            </div>
+
+            <button type="button" class="qc-submit" id="qc-submit" disabled>
+              Check my readiness
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+
+          <div class="quick-check-result" id="qc-result" aria-live="polite" tabindex="-1">
+            <span class="qc-status-label">Your readiness</span>
+            <h3 class="qc-status" id="qc-status">—</h3>
+            <p class="qc-message" id="qc-message">—</p>
+            <div class="qc-result-actions">
+              <a href="readiness-checker.html" class="btn btn-primary">
+                Get full assessment
+                <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <button type="button" class="qc-retake" id="qc-retake">Retake</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- QUICK START TOOLS -->
   <section class="tools-section" id="tools">
     <div class="container">
@@ -425,6 +485,73 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function() {
+  'use strict';
+
+  var form      = document.getElementById('qc-form');
+  var result    = document.getElementById('qc-result');
+  var submitBtn = document.getElementById('qc-submit');
+  var retakeBtn = document.getElementById('qc-retake');
+  var statusEl  = document.getElementById('qc-status');
+  var messageEl = document.getElementById('qc-message');
+  if (!form) return; // safety — section might not be on the page
+
+  var TOTAL_QS = 3;
+
+  function updateSubmit() {
+    var answered = form.querySelectorAll('input[type="radio"]:checked').length;
+    submitBtn.disabled = answered < TOTAL_QS;
+  }
+
+  function showResult() {
+    var score = 0;
+    form.querySelectorAll('input[type="radio"]:checked').forEach(function(input) {
+      score += parseInt(input.value, 10);
+    });
+
+    var status, message, cls;
+    if (score <= 1) {
+      status  = 'You need more planning';
+      message = 'Some important foundations are still missing. Start with your goal and timeline before going further.';
+      cls     = 'qc-low';
+    } else if (score === 2) {
+      status  = "You're getting there";
+      message = 'A good start — but one area still needs attention before you begin.';
+      cls     = 'qc-med';
+    } else {
+      status  = "You're ready to start";
+      message = 'Great — you have the foundations in place. Move into planning confidently.';
+      cls     = 'qc-high';
+    }
+
+    statusEl.textContent  = status;
+    messageEl.textContent = message;
+
+    result.className = 'quick-check-result show ' + cls;
+    form.hidden = true;
+
+    // Gently pull focus to the result for screen-reader users
+    setTimeout(function() { result.focus({ preventScroll: true }); }, 40);
+  }
+
+  function retake() {
+    form.querySelectorAll('input[type="radio"]').forEach(function(input) {
+      input.checked = false;
+    });
+    result.className = 'quick-check-result';
+    form.hidden = false;
+    updateSubmit();
+  }
+
+  form.addEventListener('change', function(e) {
+    if (e.target.matches('input[type="radio"]')) updateSubmit();
+  });
+  submitBtn.addEventListener('click', showResult);
+  retakeBtn.addEventListener('click', retake);
+})();
+</script>
 
 </body>
 </html>
