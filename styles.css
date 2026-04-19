@@ -3000,51 +3000,55 @@ table.register tbody tr:hover { background: var(--bg-alt); }
 
 
 /* ---------------------------------------------------------------------
-   45. LIFECYCLE DIAGRAM (homepage — project journey)
+   45. PROJECT JOURNEY DIAGRAM (homepage — idea to impact)
    --------------------------------------------------------------------- */
-.lifecycle {
+.journey {
   padding: 7rem 0;
   background: var(--bg);
 }
 
-.lifecycle-intro {
-  max-width: 46rem;
-  margin: 0 auto 5rem;
+.journey-intro {
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5rem;
   text-align: center;
 }
-.lifecycle-intro .eyebrow {
+.journey-intro .eyebrow {
   justify-content: center;
   margin-bottom: 1.25rem;
 }
-.lifecycle-intro h2 {
+.journey-intro h2 {
+  text-align: center;
   font-size: clamp(2.1rem, 4.5vw, 3rem);
   line-height: 1.05;
   margin-bottom: 1.25rem;
   letter-spacing: -0.02em;
 }
-.lifecycle-intro h2 em {
+.journey-intro h2 em {
   font-style: italic;
   color: var(--forest);
   font-weight: 300;
 }
-.lifecycle-intro p {
+.journey-intro p {
+  text-align: center;
   font-size: 1.1rem;
   color: var(--ink-soft);
   line-height: 1.6;
-  max-width: 38rem;
-  margin: 0 auto;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Stages grid */
-.lifecycle-stages {
+/* Stages grid — fills the container like every other grid on the page */
+.journey-stages {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
   position: relative;
-  max-width: 1120px;
-  margin: 0 auto;
 }
 
-.lifecycle-stage {
+.journey-stage {
   position: relative;
   text-align: center;
   padding: 0 1rem;
@@ -3054,7 +3058,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
 }
 
 /* Connecting line between icon centers — sits behind the icons */
-.lifecycle-stage:not(:last-child)::before {
+.journey-stage:not(:last-child)::before {
   content: '';
   position: absolute;
   top: 35px; /* vertical center of 72px icon */
@@ -3081,7 +3085,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.lifecycle-stage:hover .stage-icon {
+.journey-stage:hover .stage-icon {
   background: var(--forest);
   color: var(--bg);
   border-color: var(--forest);
@@ -3089,8 +3093,8 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   box-shadow: 0 14px 30px -12px rgba(31, 74, 52, 0.45);
 }
 
-.lifecycle-stage:focus-visible { outline: none; }
-.lifecycle-stage:focus-visible .stage-icon {
+.journey-stage:focus-visible { outline: none; }
+.journey-stage:focus-visible .stage-icon {
   outline: 2px solid var(--focus);
   outline-offset: 4px;
 }
@@ -3115,7 +3119,7 @@ table.register tbody tr:hover { background: var(--bg-alt); }
   letter-spacing: -0.01em;
   transition: color 0.25s ease;
 }
-.lifecycle-stage:hover .stage-title { color: var(--forest); }
+.journey-stage:hover .stage-title { color: var(--forest); }
 
 .stage-desc {
   font-size: 0.9rem;
@@ -3127,22 +3131,23 @@ table.register tbody tr:hover { background: var(--bg-alt); }
 
 /* Tablet — slightly tighter */
 @media (max-width: 1100px) and (min-width: 901px) {
-  .lifecycle-stage { padding: 0 0.4rem; }
+  .journey-stage { padding: 0 0.4rem; }
   .stage-title { font-size: 1.2rem; }
   .stage-desc { font-size: 0.85rem; }
 }
 
 /* Mobile — stack vertically */
 @media (max-width: 900px) {
-  .lifecycle { padding: 5rem 0; }
-  .lifecycle-intro { margin-bottom: 3.5rem; }
-  .lifecycle-stages {
+  .journey { padding: 5rem 0; }
+  .journey-intro { margin-bottom: 3.5rem; }
+  .journey-stages {
     grid-template-columns: 1fr;
     max-width: 30rem;
+    margin: 0 auto;
     gap: 3rem;
   }
-  .lifecycle-stage { padding: 0; }
-  .lifecycle-stage:not(:last-child)::before {
+  .journey-stage { padding: 0; }
+  .journey-stage:not(:last-child)::before {
     top: 72px;
     left: 50%;
     width: 1.5px;
