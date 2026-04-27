@@ -3211,3 +3211,53 @@ section.journey {
   }
   .stage-desc { max-width: none; }
 }
+
+
+/* ---------------------------------------------------------------------
+   46. INLINE KEY-TAKEAWAY CARD (used at the end of sub-sections)
+   --------------------------------------------------------------------- */
+/* This is the small inline version. The full-width .takeaway component
+   above (section 29) is for full-bleed page conclusions.                */
+.callout.takeaway-inline,
+.takeaway:not(.takeaway-full) {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.75rem 2rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--clay);
+  border-radius: 4px;
+  text-align: left;
+}
+.takeaway:not(.takeaway-full) {
+  /* Override the conflicting full-width takeaway rules for inline use */
+  padding: 1.75rem 2rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-left: 4px solid var(--clay);
+  border-right: 1px solid var(--line);
+}
+.takeaway-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--clay);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.takeaway:not(.takeaway-full) p {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+  font-style: italic;
+}
+.takeaway:not(.takeaway-full) p strong {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--forest);
+}
