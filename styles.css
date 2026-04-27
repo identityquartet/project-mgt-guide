@@ -3533,3 +3533,81 @@ body.is-leaving {
   body { opacity: 1; transition: none; }
   body.is-leaving { opacity: 1; }
 }
+
+
+/* ---------------------------------------------------------------------
+   53. EDITORIAL PHOTO ACCENT — Ireland section
+   ---------------------------------------------------------------------
+   Replaces the previous .ireland-emblem placeholder. Loads images/ireland.jpg
+   if present; if the file is missing, JS adds .photo-fallback class which
+   shows a graceful textured placeholder so the layout never looks broken.
+   --------------------------------------------------------------------- */
+
+.ireland-photo {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--forest);   /* shows through if image is loading or missing */
+  box-shadow: 0 24px 60px -28px rgba(26, 31, 28, 0.35);
+}
+
+.ireland-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* slight warm tone to match the editorial-documentary brief */
+  filter: saturate(0.92) contrast(0.97);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ireland-photo:hover img { transform: scale(1.03); }
+
+/* Caption overlay sitting bottom-left */
+.ireland-photo figcaption {
+  position: absolute;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  padding: 0.5rem 1rem;
+  background: rgba(26, 31, 28, 0.78);
+  color: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+/* Fallback state — when image fails to load (JS removes <img> and adds class) */
+.ireland-photo.photo-fallback {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 50%),
+    linear-gradient(135deg, var(--forest) 0%, var(--forest-dark) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 2rem;
+}
+.ireland-photo.photo-fallback figcaption {
+  position: static;
+  background: transparent;
+  color: var(--bg);
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  padding: 0;
+}
+.ireland-photo.photo-fallback figcaption::before {
+  content: "—  ";
+  color: var(--clay-soft);
+}
+
+/* Mobile — stack photo above content, slightly shorter */
+@media (max-width: 760px) {
+  .ireland-photo { aspect-ratio: 4 / 3; }
+}

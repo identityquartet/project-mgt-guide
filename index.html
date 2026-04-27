@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 <script>
 /* Page-fade — see styles.css §52, fade-in trigger */
 document.documentElement.classList.remove('no-js');
@@ -496,9 +496,14 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
 
       <div class="ireland-grid">
-        <div class="ireland-emblem" aria-hidden="true">
-          Made for Irish small orgs
-        </div>
+        <figure class="ireland-photo" aria-hidden="true">
+          <img src="images/ireland.jpg"
+               alt=""
+               loading="lazy"
+               decoding="async"
+               onerror="this.parentElement.classList.add('photo-fallback'); this.remove();">
+          <figcaption>For Ireland's small orgs.</figcaption>
+        </figure>
         <div>
           <p class="intro-para">Generic PM guides don't know what the Charities Regulator expects, or how a Local Enterprise Office grant works. This one does.</p>
           <ul>
