@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 
@@ -663,6 +663,100 @@
   });
   submitBtn.addEventListener('click', showResult);
   retakeBtn.addEventListener('click', retake);
+})();
+</script>
+
+<script>
+/* Scroll-reveal — see styles.css §51
+   Auto-applies reveal to common section/card selectors. No data-reveal
+   attributes needed in HTML. Add a selector below to extend reach. */
+(function() {
+  'use strict';
+
+  // Bail early for reduced-motion users
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+  // Bail if IntersectionObserver isn't supported (very old browsers)
+  if (!('IntersectionObserver' in window)) return;
+
+  // Selectors that should reveal as they scroll into view
+  var REVEAL_SELECTORS = [
+    '.section-head',
+    '.video-card-wrap',
+    '.lifecycle-intro, .journey-intro',
+    '.why-grid > *',
+    '.topic-card',
+    '.tool',
+    '.journey-stage',
+    '.audience-list > li',
+    '.diff-grid > *',
+    '.callout',
+    '.takeaway:not(.takeaway-full)',
+    '.quick-check-grid',
+    '.tools-grid .tool',
+    '.country-emblem',
+    '.method-card',
+    '.dimension-card',
+    '.role-card',
+    '.principle-card',
+    '.example-card',
+    '.check-list',
+    '.stakeholder-table',
+    '.ref-list',
+    '.comparison-table',
+    '.matrix',
+    '.matrix-2x2',
+    '.lifecycle-step'
+  ].join(', ');
+
+  // Hide eligible elements first (before observer fires) by adding the class
+  // ONLY after we know we'll be doing this — keeps no-JS users safe.
+  document.documentElement.classList.add('js-reveal');
+
+  function setup() {
+    var elements = document.querySelectorAll(REVEAL_SELECTORS);
+    if (!elements.length) return;
+
+    elements.forEach(function(el) {
+      el.setAttribute('data-reveal', '');
+    });
+
+    // Reveal anything already in view at page load — prevents a flash where
+    // hero content briefly appears hidden before the observer kicks in.
+    var viewportHeight = window.innerHeight;
+    elements.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < viewportHeight) {
+        el.classList.add('is-visible');
+      }
+    });
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -8% 0px',
+      threshold: 0.05
+    });
+
+    elements.forEach(function(el) {
+      // Don't observe ones already revealed
+      if (!el.classList.contains('is-visible')) {
+        observer.observe(el);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setup);
+  } else {
+    setup();
+  }
 })();
 </script>
 
