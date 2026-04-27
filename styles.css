@@ -3298,3 +3298,76 @@ section.journey {
   text-underline-offset: 2px;
 }
 .video-caption a:hover { color: var(--forest); }
+
+
+/* ---------------------------------------------------------------------
+   48. VIDEO CARD (homepage feature — card layout around an embedded video)
+   --------------------------------------------------------------------- */
+.video-card-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.video-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 24px 60px -28px rgba(26, 31, 28, 0.18);
+}
+@media (max-width: 700px) {
+  .video-card { padding: 2rem 1.5rem; border-radius: 16px; }
+}
+
+.video-card-head {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  max-width: 44rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.video-card-head .eyebrow {
+  display: inline-flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.video-card-head h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: -0.015em;
+}
+.video-card-head h2 em {
+  font-style: italic;
+  color: var(--forest);
+  font-weight: 300;
+}
+.video-card-head p {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin: 0 auto;
+}
+
+/* Video embed inside a card needs no top margin (the head already gave space) */
+.video-card .video-embed {
+  margin: 2rem 0 0;
+}
+
+/* Footer area: takeaway + CTA, side by side on desktop, stacked on mobile */
+.video-card-foot {
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 760px) {
+  .video-card-foot { flex-direction: column; gap: 1rem; }
+  .video-card-foot .btn { align-self: stretch; justify-content: center; }
+}
+
+/* The CTA button beside the takeaway should center vertically */
+.video-card-foot .btn {
+  align-self: center;
+  white-space: nowrap;
+}
