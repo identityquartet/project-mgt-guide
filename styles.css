@@ -3393,14 +3393,32 @@ section.journey {
 
 
 /* ---------------------------------------------------------------------
-   50. ANIMATED HERO GRADIENT (homepage hero — subtle drift)
+   50. ANIMATED HERO GRADIENT (homepage hero — subtle drift + parallax)
    ---------------------------------------------------------------------
-   Three soft radial blobs (forest, clay, amber) drift slowly across the
-   hero section behind the content. ~28-second cycle, low opacity.
-   Sits in a ::before layer so it doesn't affect layout. Hero children
-   stay above thanks to z-index: 1 on the grid container.
+   TWO LAYERS for richer effect:
+   1. The .hero itself gets a static fixed-attachment radial gradient.
+      Because of `background-attachment: fixed`, this layer stays put
+      relative to the viewport while you scroll — true CSS parallax.
+   2. A ::before pseudo-element on top adds three drifting radial blobs
+      with a 28-second time-based animation (independent of scroll).
+   Combined: gradient stays anchored as you scroll past the hero,
+   while colours softly drift on a slow loop.
+   Mobile: background-attachment: fixed is disabled by most mobile
+   browsers for performance, so they see only the time-based drift.
+   That's an acceptable graceful degradation.
    --------------------------------------------------------------------- */
 
+/* Layer 1 — the static parallax base (attached to viewport) */
+.hero {
+  background-image:
+    radial-gradient(ellipse at 30% 20%, rgba(14, 107, 90, 0.10), transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(225, 90, 60, 0.08), transparent 55%);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Layer 2 — the animated drifting blobs (sits above the parallax base) */
 .hero::before {
   content: "";
   position: absolute;
@@ -3415,7 +3433,7 @@ section.journey {
   animation: hero-drift 28s ease-in-out infinite alternate;
 }
 
-/* Make sure the hero content sits above the gradient layer */
+/* Make sure the hero content sits above both gradient layers */
 .hero > .container,
 .hero-grid {
   position: relative;
@@ -3430,4 +3448,10 @@ section.journey {
 /* Accessibility — respect users who've disabled motion */
 @media (prefers-reduced-motion: reduce) {
   .hero::before { animation: none; }
+  .hero { background-attachment: scroll; } /* don't lock the gradient when motion is reduced */
+}
+
+/* Mobile — disable parallax explicitly (most mobile browsers already do, but be safe) */
+@media (max-width: 768px) {
+  .hero { background-attachment: scroll; }
 }
