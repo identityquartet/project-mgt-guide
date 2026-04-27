@@ -3611,3 +3611,149 @@ body.is-leaving {
 @media (max-width: 760px) {
   .ireland-photo { aspect-ratio: 4 / 3; }
 }
+
+
+/* ---------------------------------------------------------------------
+   54. HERO — PHOTO VARIANT (Option C: full-bleed photo, dark overlay)
+   ---------------------------------------------------------------------
+   When .hero has class .hero-photo:
+   - Background photo fills the whole section
+   - Dark overlay sits over the photo for text legibility
+   - Text becomes light, button styles invert
+   - Existing animated gradient (§50) is suppressed to avoid clashing
+   - Graceful fallback if images/hero.jpg is missing: dark forest gradient
+   --------------------------------------------------------------------- */
+
+.hero.hero-photo {
+  position: relative;
+  min-height: 78vh;
+  padding: 9rem 0 6rem;
+  background: var(--ink);  /* dark fallback while image loads */
+  overflow: hidden;
+}
+
+/* Suppress the existing animated gradient + parallax when hero is photo-mode */
+.hero.hero-photo::before { display: none; }
+.hero.hero-photo {
+  background-attachment: scroll !important;
+  background-image: none !important;
+}
+
+/* Photo layer */
+.hero.hero-photo .hero-photo-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, #2a3530 0%, #15211b 100%);
+}
+.hero.hero-photo .hero-photo-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* slight desaturation gives the editorial-documentary feel */
+  filter: saturate(0.85) contrast(0.95);
+}
+
+/* Fallback styling — kicks in when image fails to load (JS adds class) */
+.hero.hero-photo .hero-photo-bg.hero-photo-fallback {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(225, 90, 60, 0.18), transparent 55%),
+    radial-gradient(ellipse at 75% 65%, rgba(14, 107, 90, 0.25), transparent 55%),
+    linear-gradient(135deg, #1a2922 0%, #0a1610 100%);
+}
+
+/* Dark gradient overlay — left-heavy so text on the left is readable */
+.hero.hero-photo .hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(10, 15, 12, 0.85) 0%, rgba(10, 15, 12, 0.55) 50%, rgba(10, 15, 12, 0.25) 100%);
+  pointer-events: none;
+}
+
+/* Container sits above all photo layers */
+.hero.hero-photo > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Text styles for dark hero — override the standard hero rules */
+.hero.hero-photo .hero-text {
+  max-width: 38rem;  /* constrain to roughly 60% of viewport */
+}
+
+.hero.hero-photo .eyebrow {
+  color: var(--clay-soft);
+}
+.hero.hero-photo .eyebrow::before { background: var(--clay-soft); }
+
+.hero.hero-photo h1 {
+  color: var(--bg);
+  font-size: clamp(2.6rem, 6.5vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+}
+.hero.hero-photo h1 em {
+  color: var(--clay-soft);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.hero.hero-photo .lede {
+  color: rgba(244, 239, 230, 0.88);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.55;
+  margin-bottom: 1rem;
+  max-width: 36rem;
+}
+
+.hero.hero-photo .tagline {
+  color: rgba(244, 239, 230, 0.65);
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+/* Button overrides for dark hero — the primary becomes light, secondary becomes outlined */
+.hero.hero-photo .btn-primary {
+  background: var(--bg);
+  color: var(--ink);
+}
+.hero.hero-photo .btn-primary:hover {
+  background: var(--clay-soft);
+  color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px -10px rgba(0, 0, 0, 0.55);
+}
+
+.hero.hero-photo .btn-secondary {
+  background: transparent;
+  color: var(--bg);
+  border: 1.5px solid rgba(244, 239, 230, 0.4);
+}
+.hero.hero-photo .btn-secondary:hover {
+  background: rgba(244, 239, 230, 0.1);
+  border-color: var(--bg);
+  color: var(--bg);
+}
+
+/* Mobile — make text readable with stronger overlay, slightly less height */
+@media (max-width: 760px) {
+  .hero.hero-photo {
+    min-height: 70vh;
+    padding: 6rem 0 4rem;
+  }
+  .hero.hero-photo .hero-photo-overlay {
+    background: linear-gradient(180deg, rgba(10, 15, 12, 0.55) 0%, rgba(10, 15, 12, 0.85) 100%);
+  }
+  .hero.hero-photo h1 { font-size: clamp(2.25rem, 9vw, 3.25rem); }
+}
+
+/* Reduced-motion users — keep things calm (no zoom on hover or photo movement) */
+@media (prefers-reduced-motion: reduce) {
+  .hero.hero-photo .hero-photo-bg img { transition: none; }
+}

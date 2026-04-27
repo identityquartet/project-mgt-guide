@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="styles.css?v=6">
 <script>
 /* Page-fade — see styles.css §52, fade-in trigger */
 document.documentElement.classList.remove('no-js');
@@ -44,8 +44,19 @@ document.addEventListener('DOMContentLoaded', function() {
 <main id="main">
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-grid">
+  <section class="hero hero-photo">
+    <!-- Photo + overlay layer (sits behind text via z-index) -->
+    <div class="hero-photo-bg" aria-hidden="true">
+      <img src="images/hero.jpg"
+           alt=""
+           loading="eager"
+           fetchpriority="high"
+           decoding="async"
+           onerror="this.parentElement.classList.add('hero-photo-fallback'); this.remove();">
+    </div>
+    <div class="hero-photo-overlay" aria-hidden="true"></div>
+
+    <div class="container">
       <div class="hero-text">
         <span class="eyebrow">A Practical Guide · Built in Ireland</span>
         <h1>Project management, <em>made simple.</em></h1>
@@ -57,26 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
             <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
           <a href="#tools" class="btn btn-secondary">Explore Templates</a>
-        </div>
-      </div>
-
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-card hero-card-1">
-          <h4>Project Plan</h4>
-          <div class="stat">12</div>
-          <div class="label">steps · 4 weeks</div>
-          <div class="progress-bar"><span style="width: 68%;"></span></div>
-        </div>
-        <div class="hero-card hero-card-2">
-          <h4>On Track</h4>
-          <div class="stat">94%</div>
-          <div class="label">of milestones met</div>
-        </div>
-        <div class="hero-card hero-card-3">
-          <h4>Stakeholders</h4>
-          <div class="stat">Aligned</div>
-          <div class="label">across 3 teams</div>
-          <div class="progress-bar"><span style="width: 85%;"></span></div>
         </div>
       </div>
     </div>
