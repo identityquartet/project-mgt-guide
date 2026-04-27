@@ -3375,3 +3375,18 @@ section.journey {
 @media (max-width: 760px) {
   .video-card-foot .btn { margin-top: 0; }
 }
+
+
+/* ---------------------------------------------------------------------
+   49. RISK PAGE — 4-card "why it matters" grid responsive overrides
+   --------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .why-grid[style*="repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 520px) {
+  .why-grid[style*="repeat(4"] {
+    grid-template-columns: 1fr !important;
+  }
+}
