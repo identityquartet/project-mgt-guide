@@ -3261,3 +3261,40 @@ section.journey {
   font-weight: 500;
   color: var(--forest);
 }
+
+
+/* ---------------------------------------------------------------------
+   47. VIDEO EMBED (responsive 16:9 wrapper for YouTube/Vimeo iframes)
+   --------------------------------------------------------------------- */
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;        /* 16:9 aspect ratio */
+  margin: 2rem 0 1rem;
+  background: var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -20px rgba(26, 31, 28, 0.35);
+}
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-caption {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.video-caption a {
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.video-caption a:hover { color: var(--forest); }
