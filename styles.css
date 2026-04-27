@@ -3502,3 +3502,34 @@ section.journey {
     transition: none;
   }
 }
+
+
+/* ---------------------------------------------------------------------
+   52. PAGE FADE TRANSITION
+   ---------------------------------------------------------------------
+   Page starts at opacity 0 and fades in. A small inline script (in <head>
+   of every page) flips body.is-loaded after first paint to trigger fade-in.
+   For internal navigation, a tiny script captures link clicks, fades out,
+   then navigates — making page transitions feel SPA-smooth.
+   --------------------------------------------------------------------- */
+
+body {
+  opacity: 0;
+  transition: opacity 0.32s ease-out;
+}
+body.is-loaded {
+  opacity: 1;
+}
+body.is-leaving {
+  opacity: 0;
+  transition: opacity 0.22s ease-in;
+}
+
+/* Fallback for users with JavaScript disabled — show the page immediately */
+.no-js body { opacity: 1; }
+
+/* Accessibility — instant for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  body { opacity: 1; transition: none; }
+  body.is-leaving { opacity: 1; }
+}
