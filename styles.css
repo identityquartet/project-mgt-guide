@@ -3366,8 +3366,12 @@ section.journey {
   .video-card-foot .btn { align-self: stretch; justify-content: center; }
 }
 
-/* The CTA button beside the takeaway should center vertically */
+/* The CTA button beside the takeaway sits a touch below center for visual balance */
 .video-card-foot .btn {
   align-self: center;
+  margin-top: 1rem;
   white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .video-card-foot .btn { margin-top: 0; }
 }
