@@ -3757,3 +3757,124 @@ body.is-leaving {
 @media (prefers-reduced-motion: reduce) {
   .hero.hero-photo .hero-photo-bg img { transition: none; }
 }
+
+
+/* ---------------------------------------------------------------------
+   55. NAV DROPDOWN — Guide menu
+   ---------------------------------------------------------------------
+   The nav <ul> hosts a "Guide" item that opens a dropdown of the 7 topic
+   pages. Click to open, click anywhere outside to close, Esc to close.
+   Mobile: dropdown becomes inline below the trigger (no positioning fuss).
+   --------------------------------------------------------------------- */
+
+.nav-dropdown {
+  position: relative;
+}
+
+/* Trigger button styled to match the other nav links */
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0;
+  letter-spacing: inherit;
+  transition: color 0.2s ease;
+}
+.nav-dropdown-trigger:hover,
+.nav-dropdown-trigger.is-active,
+.nav-dropdown-trigger[aria-expanded="true"] {
+  color: var(--forest);
+}
+
+/* Chevron rotates when the menu is open */
+.nav-chevron {
+  transition: transform 0.25s ease;
+  margin-top: 1px;  /* tiny optical alignment */
+}
+.nav-dropdown-trigger[aria-expanded="true"] .nav-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu — hidden by default */
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  min-width: 240px;
+  margin: 0;
+  padding: 0.5rem 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px -16px rgba(26, 31, 28, 0.22);
+  list-style: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+}
+.nav-dropdown-trigger[aria-expanded="true"] + .nav-dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Menu items */
+.nav-dropdown-menu li { margin: 0; padding: 0; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 0.6rem 1.25rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a:focus-visible {
+  background: var(--bg-alt);
+  color: var(--forest);
+  outline: none;
+}
+.nav-dropdown-menu a.is-active {
+  color: var(--forest);
+  background: var(--bg-alt);
+  font-weight: 500;
+}
+.nav-dropdown-menu a.is-active::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--clay);
+  border-radius: 50%;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+/* Mobile — dropdown inline beneath trigger, no positioning */
+@media (max-width: 760px) {
+  .nav-dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: 0;
+    background: transparent;
+    padding-left: 1rem;
+    min-width: 0;
+  }
+  .nav-dropdown-trigger[aria-expanded="true"] + .nav-dropdown-menu {
+    transform: none;
+  }
+}

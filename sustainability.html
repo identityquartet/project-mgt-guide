@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=7">
 <script>
 /* Page-fade — see styles.css §52, fade-in trigger */
 document.documentElement.classList.remove('no-js');
@@ -33,10 +33,24 @@ document.addEventListener('DOMContentLoaded', function() {
       Project Management Made Simple
     </a>
     <ul>
-      <li><a href="index.html#topics" class="active">Topics</a></li>
-      <li><a href="people.html">People</a></li>
-      <li><a href="risk-ethics-governance.html">Risk &amp; Governance</a></li>
+      <li class="nav-dropdown">
+        <button type="button" class="nav-dropdown-trigger is-active" aria-expanded="false" aria-haspopup="true" aria-controls="nav-guide-menu">
+          Guide
+          <svg class="nav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="nav-dropdown-menu" id="nav-guide-menu" role="menu">
+          <li><a href="basics.html">Basics</a></li>
+          <li><a href="strategy.html">Strategy</a></li>
+          <li><a href="planning.html">Planning</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="risk-ethics-governance.html">Risk &amp; Governance</a></li>
+          <li><a href="delivery.html">Delivery</a></li>
+          <li><a href="sustainability.html" class="is-active" aria-current="page">Sustainability</a></li>
+        </ul>
+      </li>
+      <li><a href="index.html#tools">Tools</a></li>
       <li><a href="index.html#ireland">Irish Context</a></li>
+      <li><a href="index.html#start">Get Started</a></li>
     </ul>
   </div>
 </header>
@@ -505,5 +519,47 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 })();
 </script>
+<script>
+/* Nav dropdown — see styles.css §55 */
+(function() {
+  'use strict';
+  var trigger = document.querySelector('.nav-dropdown-trigger');
+  var menu    = document.getElementById('nav-guide-menu');
+  if (!trigger || !menu) return;
+
+  function open() {
+    trigger.setAttribute('aria-expanded', 'true');
+  }
+  function close() {
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+  function isOpen() {
+    return trigger.getAttribute('aria-expanded') === 'true';
+  }
+
+  // Toggle on trigger click
+  trigger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (isOpen()) close(); else open();
+  });
+
+  // Close when clicking anywhere outside
+  document.addEventListener('click', function(e) {
+    if (!isOpen()) return;
+    if (e.target === trigger || trigger.contains(e.target)) return;
+    if (menu.contains(e.target)) return;
+    close();
+  });
+
+  // Close on Escape, return focus to trigger
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isOpen()) {
+      close();
+      trigger.focus();
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
